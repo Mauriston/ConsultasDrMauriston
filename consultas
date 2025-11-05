@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dr. Mauriston Martins - Oncologista Ortopédico</title>
+    
+    <!-- Metatags para Open Graph (pré-visualização em redes sociais) -->
+    <meta property="og:title" content="Dr. Mauriston Martins - Oncologista Ortopédico" />
+    <meta property="og:description" content="Cartão de visitas digital com informações de contato e agendamento." />
+    <meta property="og:image" content="https://i.imgur.com/KoXn1zC.png" />
+    <meta property="og:url" content="https://consultas.drmauriston.com" />
+    <meta property="og:type" content="website" />
+    
+    <!-- Inclui o framework de design Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Importa as fontes do Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS personalizados para fontes e animações -->
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .font-montserrat {
+        font-family: 'Montserrat', sans-serif;
+      }
+      .font-inter {
+        font-family: 'Inter', sans-serif;
+      }
+      @keyframes slide-up {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-slide-up {
+        animation: slide-up 0.6s ease-out forwards;
+        opacity: 0;
+      }
+    </style>
+</head>
+<body>
+    <noscript>Você precisa habilitar o JavaScript para rodar esta aplicação.</noscript>
+    <div id="root"></div>
+
+    <!-- Inclui as bibliotecas React e ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Inclui o Babel para converter JSX no navegador -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Código da aplicação React (JSX) -->
+    <script type="text/babel">
+    
+    // =================================================================================
+    // DADOS DA APLICAÇÃO (antes em constants.ts)
+    // =================================================================================
+    const clinics = [
+      {
+        id: 'tope',
+        logoUrl: 'https://i.imgur.com/lKEmrN6.png',
+        title: 'TOPE',
+        subtitle: 'Real Hospital Português de Boa Viagem',
+        schedule: 'Terças-feiras das 17h às 20h',
+        consultasUrl: 'https://wa.me/5581994166172',
+        infoUrl: 'tel:8134161750',
+        mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.902010766287!2d-34.8945963737624!3d-8.11145949191771!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1fa763377def%3A0x1fce1830beabdd88!2sAv.%20Conselheiro%20Aguiar%2C%202502%20-%20Boa%20Viagem%2C%20Recife%20-%20PE%2C%2051020-020!5e0!3m2!1spt-BR!2sbr!4v1752774842236!5m2!1spt-BR!2sbr',
+        imageUrl: "https://i.imgur.com/XgiAu1g.png",
+      },
+      {
+        id: 'ortocentro',
+        logoUrl: 'https://i.imgur.com/KPWnJNc.png',
+        title: 'ORTOCENTRO',
+        subtitle: 'RioMar Trade Center',
+        schedule: 'Terças-feiras das 14h às 17h',
+        consultasUrl: 'https://wa.me/558132415836',
+        infoUrl: 'tel:8132415836',
+        mapEmbedUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.142575491875!2d-34.894402624991855!3d-8.086938991941476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1f3ff7cfbfe3%3A0x5806ebd91a90db21!2sOrtocentro%20Riomar!5e0!3m2!1spt-BR!2sbr!4v1752774758285!5m2!1spt-BR!2sbr',
+        imageUrl: "https://i.imgur.com/sGBpiBt.jpeg",
+      },
+    ];
+
+    const academicFormation = [
+      'Graduação em Medicina na Universidade de Pernambuco (2012)',
+      'Residência Ortopedia e Traumatologia no HGV (2017)',
+      'Curso de formação de oficiais da Marinha - CIAW/RJ (2017)',
+      'Especialização em Oncologia Ortopédica no INCA/RJ (2021)',
+      'Especialização em Preceptoria Médica na USP (2022)',
+      'Agraciado com a "Medalha Barata Ribeiro" da SBOT/RJ (2023)',
+      'Membro Titular SBOT, ABOO, GBS e SBC',
+      'Membro Associado SBCO',
+    ];
+
+    const professionalExperience = [
+      'Chefe da Clínica de Traumatologia e Ortopedia do Hospital Naval de Recife',
+      'Vice-supervisor da Residência em Ortopedia e Traumatologia do HGV',
+      'Oncologista Ortopédico do Real Hospital Português',
+      'Coordenador do comitê de Oncologia Ortopédica da SBOT PE',
+      'Membro da Câmara Técnica de Ortopedia do CREMEPE',
+    ];
+
+    // =================================================================================
+    // ÍCONES SVG (antes em components/icons.tsx)
+    // =================================================================================
+    const MapPinIcon = ({ className }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21s-8-6.17-8-10.17C4 6.3 7.58 3 12 3s8 3.3 8 7.83C20 14.83 12 21 12 21zm0-13a3 3 0 100 6 3 3 0 000-6z" />
+      </svg>
+    );
+
+    const CloseIcon = ({ className }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    );
+
+    const InstagramIcon = ({ className }) => (
+        <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+    );
+
+    const YoutubeIcon = ({ className }) => (
+        <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17z"></path>
+          <path d="m10 15 5-3-5-3z"></path>
+        </svg>
+    );
+
+    const WhatsappIcon = ({ className }) => (
+      <svg xmlns="http://www.w3.org/2000/svg" className={className} viewBox="0 0 810 810" fill="currentColor">
+        <path fillRule="evenodd" d="M 634.960938 175.074219 C 574.40625 114.441406 493.867188 81.035156 408.058594 81.003906 C 231.238281 81.003906 87.332031 224.894531 87.273438 401.757812 C 87.242188 458.300781 102.023438 513.484375 130.09375 562.121094 L 84.582031 728.359375 L 254.632812 683.753906 C 301.484375 709.320312 354.238281 722.777344 407.921875 722.792969 L 408.058594 722.792969 C 584.847656 722.792969 728.769531 578.886719 728.832031 402.019531 C 728.859375 316.304688 695.53125 235.722656 634.960938 175.089844 Z M 408.058594 668.621094 L 407.949219 668.621094 C 360.113281 668.605469 313.1875 655.746094 272.246094 631.460938 L 262.507812 625.675781 L 161.59375 652.148438 L 188.523438 553.753906 L 182.1875 543.664062 C 155.503906 501.214844 141.398438 452.144531 141.429688 401.773438 C 141.488281 254.777344 261.09375 135.175781 408.167969 135.175781 C 479.378906 135.207031 546.320312 162.96875 596.660156 213.371094 C 647.003906 263.761719 674.703125 330.761719 674.671875 401.988281 C 674.609375 549.003906 555.007812 668.605469 408.058594 668.605469 Z M 554.300781 468.945312 C 546.289062 464.929688 506.882812 445.546875 499.527344 442.871094 C 492.175781 440.195312 486.839844 438.859375 481.503906 446.886719 C 476.164062 454.917969 460.800781 472.972656 456.125 478.308594 C 451.449219 483.664062 446.773438 484.324219 438.757812 480.308594 C 430.746094 476.296875 404.921875 467.835938 374.296875 440.535156 C 350.472656 419.277344 334.382812 393.039062 329.707031 385.007812 C 325.03125 376.980469 329.214844 372.640625 333.214844 368.660156 C 336.8125 365.058594 341.226562 359.292969 345.242188 354.617188 C 349.257812 349.941406 350.582031 346.585938 353.253906 341.25 C 355.933594 335.898438 354.59375 331.222656 352.59375 327.207031 C 350.59375 323.191406 334.570312 283.738281 327.878906 267.699219 C 321.371094 252.070312 314.757812 254.195312 309.851562 253.933594 C 305.175781 253.699219 299.839844 253.65625 294.484375 253.65625 C 289.132812 253.65625 280.457031 255.65625 273.105469 263.683594 C 265.753906 271.710938 245.050781 291.105469 245.050781 330.542969 C 245.050781 369.980469 273.769531 408.113281 277.78125 413.464844 C 281.796875 418.816406 334.304688 499.765625 414.703125 534.496094 C 433.824219 542.757812 448.757812 547.695312 460.398438 551.386719 C 479.597656 557.492188 497.066406 556.632812 510.878906 554.570312 C 526.277344 552.261719 558.300781 535.175781 564.976562 516.457031 C 571.652344 497.734375 571.652344 481.679688 569.652344 478.339844 C 567.652344 475.003906 562.300781 472.988281 554.285156 468.972656 Z M 554.300781 468.945312" />
+      </svg>
+    );
+    
+    // =================================================================================
+    // COMPONENTES (antes em /components/*)
+    // =================================================================================
+
+    // --- Componente: Header ---
+    function Header({ onInfoClick }) {
+      return (
+        <header className="bg-white rounded-2xl shadow-lg p-6 text-center">
+          <img
+            src="https://i.imgur.com/KoXn1zC.png"
+            alt="Dr. Mauriston Martins"
+            className="w-28 h-28 rounded-full border-4 border-white shadow-md mx-auto"
+          />
+          <div className="mt-4">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 font-montserrat">
+              Mauriston Martins
+            </h1>
+            <h2 className="text-base sm:text-lg font-bold text-gray-500 tracking-wider font-montserrat">
+              ONCOLOGISTA ORTOPÉDICO
+            </h2>
+            <p className="text-sm text-gray-500 mt-1 font-inter">CRM-PE: 20674 / REQ: 16460</p>
+          </div>
+          
+          <hr className="my-6 border-t border-gray-200" />
+          
+          <div className="flex justify-between items-center">
+            <button 
+              onClick={onInfoClick}
+              className="text-sm font-bold text-[#2E8B9A] hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2E8B9A] rounded-md px-1 py-0.5"
+              aria-label="Saiba mais sobre a formação e atuação profissional"
+            >
+              Saiba mais
+            </button>
+            <div className="flex items-center gap-6">
+              <a href="https://www.instagram.com/dr.mauristonmartins" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Dr. Mauriston Martins">
+                <InstagramIcon className="w-6 h-6 text-gray-500 hover:text-[#2E8B9A] transition-colors" />
+              </a>
+              <a href="https://www.youtube.com/@OncoOrtopedia" target="_blank" rel="noopener noreferrer" aria-label="Canal do YouTube de Dr. Mauriston Martins">
+                <YoutubeIcon className="w-6 h-6 text-gray-500 hover:text-[#2E8B9A] transition-colors" />
+              </a>
+              <a href="https://wa.me/5581986541187" target="_blank" rel="noopener noreferrer" aria-label="Contato via WhatsApp">
+                <WhatsappIcon className="w-6 h-6 text-gray-500 hover:text-[#2E8B9A] transition-colors" />
+              </a>
+            </div>
+          </div>
+        </header>
+      );
+    };
+
+    // --- Componente: LocationCard ---
+    function LocationCard({ clinic, onMapClick }) {
+      return (
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+          <div className="p-4 flex items-center gap-4">
+            <img src={clinic.logoUrl} alt={`${clinic.title} logo`} className="w-10 h-10 rounded-full object-contain bg-gray-100 p-1" />
+            <div>
+              <h3 className="text-lg font-bold text-gray-800 font-montserrat">{clinic.title}</h3>
+              <p className="text-sm font-bold text-gray-500 font-inter">{clinic.subtitle}</p>
+            </div>
+          </div>
+          <div className="h-40 bg-gray-200">
+            <img 
+              src={clinic.imageUrl} 
+              alt={`Imagem da clínica ${clinic.title}`} 
+              className="w-full h-full object-cover" 
+            />
+          </div>
+          <div className="p-4">
+            <p className="text-gray-700 font-inter">{clinic.schedule}</p>
+          </div>
+          <div className="px-4 py-3 border-t border-gray-200 flex justify-between items-center">
+            <div className="flex gap-4">
+              <a 
+                href={clinic.consultasUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="border border-gray-300 text-gray-600 font-bold py-2 px-4 rounded-full hover:bg-[#2E8B9A] hover:text-white transition-all duration-300 text-xs sm:text-sm uppercase tracking-wider font-montserrat"
+              >
+                Consultas
+              </a>
+              <a 
+                href={clinic.infoUrl} 
+                className="border border-gray-300 text-gray-600 font-bold py-2 px-4 rounded-full hover:bg-[#2E8B9A] hover:text-white transition-all duration-300 text-xs sm:text-sm uppercase tracking-wider font-montserrat"
+              >
+                Informações
+              </a>
+            </div>
+            <button 
+              onClick={() => onMapClick(clinic.mapEmbedUrl)}
+              aria-label="Ver no mapa" 
+              className="text-gray-500 hover:text-[#2E8B9A] transition-colors"
+            >
+              <MapPinIcon className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      );
+    };
+
+    // --- Componente: InfoModal ---
+    function InfoModal({ isOpen, onClose }) {
+      if (!isOpen) return null;
+
+      return (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 transition-opacity duration-300"
+          onClick={onClose}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="info-modal-title"
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-xl relative w-full max-w-lg p-6 sm:p-8 transform transition-all duration-300 scale-95 opacity-0 animate-slide-up"
+            onClick={(e) => e.stopPropagation()} 
+            style={{ animationFillMode: 'forwards', animationDelay: '50ms' }}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 bg-gray-100 rounded-full p-1.5 text-gray-600 hover:bg-gray-200 hover:text-gray-800 transition-all z-10"
+              aria-label="Fechar"
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
+            
+            <div className="space-y-8 max-h-[80vh] overflow-y-auto pr-4 -mr-4">
+              <div>
+                <h3 id="info-modal-title" className="text-xl font-bold text-gray-800 font-montserrat mb-3">
+                  FORMAÇÃO ACADÊMICA
+                </h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-600 font-inter">
+                  {academicFormation.map((item, index) => <li key={index}>{item}</li>)}
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 font-montserrat mb-3">
+                  ATUAÇÃO PROFISSIONAL
+                </h3>
+                <ul className="list-disc list-inside space-y-2 text-gray-600 font-inter">
+                  {professionalExperience.map((item, index) => <li key={index}>{item}</li>)}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+    
+    // --- Componente: Modal do Mapa ---
+    function MapModal({ mapUrl, onClose }) {
+      return (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+          onClick={onClose}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl relative w-full max-w-3xl aspect-w-16 aspect-h-9"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute -top-3 -right-3 bg-white rounded-full p-1.5 shadow-lg text-gray-700 hover:bg-gray-200 transition-all z-10"
+              aria-label="Fechar mapa"
+            >
+              <CloseIcon className="w-6 h-6" />
+            </button>
+            <iframe
+              src={mapUrl}
+              className="w-full h-full rounded-lg"
+              style={{ border: 0, minHeight: '75vh' }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      );
+    };
+
+
+    // =================================================================================
+    // COMPONENTE PRINCIPAL (antes em App.tsx)
+    // =================================================================================
+    function App() {
+      const [isModalOpen, setIsModalOpen] = React.useState(false);
+      const [selectedMapUrl, setSelectedMapUrl] = React.useState('');
+      const [isInfoModalOpen, setIsInfoModalOpen] = React.useState(false);
+
+      const handleMapClick = (mapUrl) => {
+        setSelectedMapUrl(mapUrl);
+        setIsModalOpen(true);
+      };
+
+      const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedMapUrl('');
+      };
+
+      const handleOpenInfoModal = () => setIsInfoModalOpen(true);
+      const handleCloseInfoModal = () => setIsInfoModalOpen(false);
+
+      return (
+        <div className="bg-[#f0f2f6] min-h-screen p-4 sm:p-6 flex items-start justify-center font-inter">
+          <main className="max-w-md w-full mx-auto py-6">
+            <div className="space-y-6">
+              <div className="animate-slide-up" style={{ animationDelay: '100ms' }}>
+                <Header onInfoClick={handleOpenInfoModal} />
+              </div>
+              {clinics.map((clinic, index) => (
+                <div 
+                  key={clinic.id} 
+                  className="animate-slide-up" 
+                  style={{ animationDelay: `${(index + 2) * 150}ms` }}
+                >
+                  <LocationCard clinic={clinic} onMapClick={handleMapClick} />
+                </div>
+              ))}
+            </div>
+          </main>
+          {isModalOpen && <MapModal mapUrl={selectedMapUrl} onClose={handleCloseModal} />}
+          <InfoModal isOpen={isInfoModalOpen} onClose={handleCloseInfoModal} />
+        </div>
+      );
+    };
+
+    // =================================================================================
+    // RENDERIZA A APLICAÇÃO (antes em index.tsx)
+    // =================================================================================
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+
+    </script>
+</body>
+</html>
+
