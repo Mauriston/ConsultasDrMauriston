@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dr. Mauriston Martins - Oncologista Ortopédico</title>
     
-    <!-- Metatags para Open Graph (pré-visualização em redes sociais) -->
     <meta property="og:title" content="Dr. Mauriston Martins - Oncologista Ortopédico" />
     <meta property="og:description" content="Cartão de visitas digital com informações de contato e agendamento." />
-    <meta property="og:image" content="https://i.imgur.com/KoXn1zC.png" />
-    <meta property="og:url" content="https://consultas.drmauriston.com" />
+    <meta property="og:image" content="https://i.imgur.com/A2y0sYe.png" />
+    <meta property="og:url" content="https://mauriston.github.io/ConsultasDrMauriston/" />
     <meta property="og:type" content="website" />
     
-    <!-- Inclui o framework de design Tailwind CSS -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dr. Mauriston Martins - Oncologista Ortopédico" />
+    <meta name="twitter:description" content="Cartão de visitas digital com informações de contato e agendamento." />
+    <meta name="twitter:image" content="https://i.imgur.com/A2y0sYe.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Importa as fontes do Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
     
-    <!-- Estilos CSS personalizados para fontes e animações -->
     <style>
       body {
         font-family: 'Inter', sans-serif;
@@ -54,18 +54,15 @@
     <noscript>Você precisa habilitar o JavaScript para rodar esta aplicação.</noscript>
     <div id="root"></div>
 
-    <!-- Inclui as bibliotecas React e ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     
-    <!-- Inclui o Babel para converter JSX no navegador -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- Código da aplicação React (JSX) -->
     <script type="text/babel">
     
     // =================================================================================
-    // DADOS DA APLICAÇÃO (antes em constants.ts)
+    // DADOS DA APLICAÇÃO
     // =================================================================================
     const clinics = [
       {
@@ -112,7 +109,7 @@
     ];
 
     // =================================================================================
-    // ÍCONES SVG (antes em components/icons.tsx)
+    // ÍCONES SVG
     // =================================================================================
     const MapPinIcon = ({ className }) => (
       <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -148,7 +145,7 @@
     );
     
     // =================================================================================
-    // COMPONENTES (antes em /components/*)
+    // COMPONENTES
     // =================================================================================
 
     // --- Componente: Header ---
@@ -328,7 +325,7 @@
 
 
     // =================================================================================
-    // COMPONENTE PRINCIPAL (antes em App.tsx)
+    // COMPONENTE PRINCIPAL
     // =================================================================================
     function App() {
       const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -373,7 +370,7 @@
     };
 
     // =================================================================================
-    // RENDERIZA A APLICAÇÃO (antes em index.tsx)
+    // RENDERIZA A APLICAÇÃO
     // =================================================================================
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
@@ -381,4 +378,3 @@
     </script>
 </body>
 </html>
-
